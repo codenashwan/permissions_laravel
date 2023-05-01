@@ -13,21 +13,10 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $guarded = [];
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
+   
     protected $casts = [
         'email_verified_at' => 'datetime',
         'routes' => 'array',
     ];
 
-    public function photo(){
-        return !$this->photo ? asset('img/logo.jpeg') : asset('upload/profile/'.$this->photo);
-    }
-    public function scopeOfSearch($query,$search){
-        return $query->where('name','like','%'.$search.'%')
-            ->orWhere('email','like','%'.$search.'%');
-    }
 }
